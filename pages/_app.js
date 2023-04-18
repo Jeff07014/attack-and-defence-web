@@ -10,13 +10,9 @@ import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react'
 
-
-export default function App({ 
-    Component,
-    pageProps: { session, ...pageProps },
-}) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <SessionProvider session={session}>

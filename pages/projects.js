@@ -5,7 +5,7 @@ import { PageSEO } from '@/components/SEO'
 export function getStaticProps() {
   return {
     // returns the default 404 page with a status code of 404 in production
-     notFound: true
+    notFound: true,
   }
 }
 export default function Projects() {

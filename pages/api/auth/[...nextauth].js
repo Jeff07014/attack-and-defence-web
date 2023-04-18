@@ -1,9 +1,9 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
-import GoogleProvider from "next-auth/providers/google"
-import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+import NextAuth from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
+// import CredentialsProvider from 'next-auth/providers/credentials'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -25,30 +25,30 @@ export const authOptions = {
     //   name: "Sign In With Credentials",
     //   credentials: {
 
-    //     username: { 
-    //       label: "Username", 
-    //       type: "text", 
-    //       placeholder:"Enter Your Username..." 
+    //     username: {
+    //       label: "Username",
+    //       type: "text",
+    //       placeholder:"Enter Your Username..."
     //     },
 
-    //     password: { 
-    //       label: "Password", 
-    //       type: "password", 
-    //       placeholder:"Enter Your Password..." 
+    //     password: {
+    //       label: "Password",
+    //       type: "password",
+    //       placeholder:"Enter Your Password..."
     //     }
     //   }
 
     // })
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       // Allows relative callback URLs
       // if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
       // else if (new URL(url).origin === baseUrl) return url
       return baseUrl
-    }
-  }
+    },
+  },
   // pages: {
   //   signIn: '/auth/signin',
   //   signOut: '/auth/signout',

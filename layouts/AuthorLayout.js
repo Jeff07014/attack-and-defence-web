@@ -2,7 +2,7 @@ import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
 export default function AuthorLayout({ children, content }) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github, meme} = content
+  const { name, avatar, occupation, company, email, twitter, linkedin, github, meme } = content
   return (
     <>
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
@@ -33,13 +33,7 @@ export default function AuthorLayout({ children, content }) {
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
             {children}
-            <Image
-              src={meme}
-              alt={meme}
-              width={600}
-              height={600}
-              className="h-auto w-auto"
-            />
+            <Image src={meme} alt={meme} width={600} height={600} className="h-auto w-auto" />
           </div>
         </div>
       </div>
