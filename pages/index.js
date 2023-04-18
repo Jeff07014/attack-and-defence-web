@@ -13,7 +13,7 @@ import Image from '@/components/Image'
 
 const prisma = new PrismaClient()
 const MAX_DISPLAY = 5
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const posts = await prisma.message.findMany()
   return {
     props: {

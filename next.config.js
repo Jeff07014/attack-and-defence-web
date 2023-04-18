@@ -90,6 +90,12 @@ module.exports = () => {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: '**',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   })

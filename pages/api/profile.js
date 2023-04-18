@@ -11,7 +11,7 @@ const profile = async (req, res) => {
   const session = await getServerSession(req, res, authOptions)
   if (session) {
     if (req.method === 'GET') {
-      await prisma.user.findUnique({
+      const profile = await prisma.user.findUnique({
         where: {
           email: session.user.email,
         },

@@ -106,7 +106,11 @@ export default function Profile() {
     setImageSrc(null)
     router.reload()
   }
-  if (error) return <div>Failed to load</div>
+  if (error) {
+    console.log('error:', error)
+    console.log('data:', data)
+    return <div>Failed to load</div>
+  }
   if (!data) return <div>Loading...</div>
 
   if (session)
@@ -201,6 +205,8 @@ export default function Profile() {
                         className="h-12 w-12 rounded-full text-gray-300"
                         src={data.image}
                         alt="Not Found"
+                        width={200}
+                        height={200}
                       />
                       <label
                         htmlFor="file-upload"
