@@ -14,8 +14,8 @@ import { SessionProvider } from 'next-auth/react'
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
         </Head>
@@ -25,7 +25,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
             <Component {...pageProps} />
           </SearchProvider>
         </LayoutWrapper>
-      </SessionProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SessionProvider>
   )
 }

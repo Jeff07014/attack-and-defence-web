@@ -1,6 +1,6 @@
 import Link from './Link'
 import { useSession } from 'next-auth/react'
-import { Image } from 'next/image'
+import Image from './Image'
 export default function Component() {
   const { data: session } = useSession()
   if (session) {
@@ -9,7 +9,13 @@ export default function Component() {
         <Link href="/profile" className="flex p-1">
           <div className="basis-3/4">{session.user.name}</div>
           <div className="h-6 w-6 basis-1/4">
-            <Image className="rounded-full" src={session.user.image} alt="Not Found" />
+            <Image
+              className="rounded-full"
+              src={session.user.image}
+              alt="Not Found"
+              width={100}
+              height={100}
+            />
           </div>
         </Link>
       </div>
