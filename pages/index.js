@@ -110,7 +110,13 @@ export default function Home({ posts }) {
                     <div className="space-y-5 xl:col-span-3">
                       <div className="space-y-3">
                         <div className="flex">
-                          <Image src={image} alt="Not Found" className="h-8 w-8 rounded-full" />
+                          <Image
+                            src={image}
+                            alt="Not Found"
+                            className="h-8 w-8 rounded-full"
+                            width={300}
+                            height={300}
+                          />
                           <h2 className="px-3 text-xl font-bold leading-8 tracking-tight">
                             {name}
                           </h2>
