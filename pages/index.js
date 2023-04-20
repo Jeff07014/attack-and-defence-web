@@ -1,4 +1,4 @@
-import Link from '@/components/Link'
+// import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 // import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -6,24 +6,27 @@ import siteMetadata from '@/data/siteMetadata'
 // import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { NewsletterForm } from 'pliny/ui/NewsletterForm'
 // import { allBlogs } from 'contentlayer/generated'
-import { PrismaClient } from '@prisma/client'
+// import { PrismaClient } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import Image from '@/components/Image'
+import useSWR from 'swr'
 
-const prisma = new PrismaClient()
-const MAX_DISPLAY = 5
-export const getServerSideProps = async () => {
-  const posts = await prisma.message.findMany()
-  return {
-    props: {
-      posts,
-    },
-  }
-}
-export default function Home({ posts }) {
+// const prisma = new PrismaClient()
+// const MAX_DISPLAY = 5
+// export const getServerSideProps = async () => {
+//   const posts = await prisma.message.findMany()
+//   return {
+//     props: {
+//       posts,
+//     },
+//   }
+// }
+export default function Home() {
   const { data: session } = useSession({})
   const router = useRouter()
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+  const { data: posts, error } = useSWR('/api/message', fetcher)
 
   async function onSubmit(event) {
     event.preventDefault()
@@ -51,7 +54,13 @@ export default function Home({ posts }) {
       alert('plese login first!')
     }
   }
+  if (error) {
+    console.log(error)
+  }
 
+  if (!posts) {
+    return 'No messages found.'
+  }
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
@@ -93,8 +102,8 @@ export default function Home({ posts }) {
         </form>
 
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
+          {!posts.length && 'No messages Found'}
+          {posts.map((post) => {
             const { id, name, timestamp, content, image } = post
             const time = new Date(parseInt(timestamp))
             return (
@@ -133,17 +142,6 @@ export default function Home({ posts }) {
           })}
         </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
       {siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
@@ -151,4 +149,15 @@ export default function Home({ posts }) {
       )}
     </>
   )
+  // {posts.length > MAX_DISPLAY && (
+  //   <div className="flex justify-end text-base font-medium leading-6">
+  //     <Link
+  //       href="/blog"
+  //       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+  //       aria-label="All posts"
+  //     >
+  //       All Posts &rarr;
+  //     </Link>
+  //   </div>
+  // )}
 }
