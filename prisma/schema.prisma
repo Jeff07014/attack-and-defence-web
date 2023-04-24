@@ -46,6 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   message       Message[]
+  ai            Ai[]
 }
 
 model Message {
@@ -53,6 +54,14 @@ model Message {
   userId        String
   name          String
   image         String
+  content       String
+  timestamp     String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Ai {
+  id            String      @id @default(cuid())
+  userId        String
   content       String
   timestamp     String
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)

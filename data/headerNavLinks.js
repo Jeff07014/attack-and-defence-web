@@ -16,6 +16,10 @@ const headerNavLinks = [
     title: 'About',
   },
   {
+    href: '/ai',
+    title: 'AI',
+  },
+  {
     href: '/#',
     title: 'Login',
   },
